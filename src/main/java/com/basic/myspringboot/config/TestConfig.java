@@ -5,12 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ProdConfig {
+public class TestConfig {
     @Bean
     public CustomerVO customerVO() {
         return CustomerVO.builder() //CustomerVOBuilder
-                .id(200L)
-                .mode("운영환경")
+                .id(100L)
+                .mode("테스트환경")
                 .build();
     }
 }
