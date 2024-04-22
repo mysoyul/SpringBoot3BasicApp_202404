@@ -1,5 +1,6 @@
 package com.basic.myspringboot.runner;
 
+import com.basic.myspringboot.vo.CustomerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -19,9 +20,13 @@ public class MyRunner implements ApplicationRunner {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private CustomerVO customer;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         System.out.println("2. MyRunner  class");
+        System.out.println("현재 활성화된 Profile = " + customer);
         System.out.println("환경변수 myboot.name = " + name);
         System.out.println("환경변수 myboot.age = " + age);
 

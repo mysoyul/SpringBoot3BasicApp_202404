@@ -24,7 +24,6 @@ public class BasicSpringBootAppApplication {
 	} //main
 
 	@Bean
-	@Order(1)
 	public ApplicationRunner applicationRunner() {
 		//1. Anonymous Inner class
 		return new ApplicationRunner() {
@@ -48,7 +47,6 @@ public class BasicSpringBootAppApplication {
 	}
 
 	@Bean
-	@Order(3)
 	public ApplicationRunner applicationRunnerLambda() {
 		//2. Lambda Expression (람다식)
 		return args -> {
