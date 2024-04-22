@@ -43,7 +43,10 @@ public class BasicSpringBootAppApplication {
 	@Order(3)
 	public ApplicationRunner applicationRunnerLambda() {
 		//2. Lambda Expression (람다식)
-		return args -> System.out.println("3. Lambda Expression 형태");
+		return args -> {
+			System.out.println("3. Lambda Expression 형태");
+			args.getOptionNames().forEach(name -> System.out.println("Option argument name = " + name));
+		};
 	}
 
 
