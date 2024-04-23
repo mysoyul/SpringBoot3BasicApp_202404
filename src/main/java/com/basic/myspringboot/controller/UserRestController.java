@@ -5,6 +5,7 @@ import com.basic.myspringboot.exception.BusinessException;
 import com.basic.myspringboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,23 @@ public class UserRestController {
         Optional<User> optionalUser = userRepository.findById(id);
         return optionalUser
                 .orElseThrow(() -> new BusinessException("User Not Found", HttpStatus.NOT_FOUND));
+    }
+
+    @PatchMapping("/{email}/")
+    public User updateUser(@PathVariable String email, @RequestBody User userDetail) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new BusinessException("User Not Found", HttpStatus.NOT_FOUND));
+        user.setName(userDetail.getName());
+        User updatedUser = userRepository.save(user);
+        return updatedUser;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("User Not Found", HttpStatus.NOT_FOUND));
+        userRepository.delete(user);
+        return ResponseEntity.ok("ID = " + id + " User가 삭제 되었습니다.");
     }
 
 }
