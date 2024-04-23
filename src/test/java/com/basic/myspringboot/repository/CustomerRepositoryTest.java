@@ -35,6 +35,18 @@ class CustomerRepositoryTest {
 
         Optional<Customer> optionalCustomer =
                 customerRepository.findByCustomerId(addCustomer.getCustomerId());
+        if(optionalCustomer.isPresent()){
+            Customer existCustomer = optionalCustomer.get();
+        }
 
     }
+
+    @Test
+    void finder() throws Exception {
+        Optional<Customer> notExistOptional = customerRepository.findByCustomerId("B001");
+        //orElseThrow(Supplier) T get()  T extends Throwable
+        Customer existCustomer = notExistOptional.orElseThrow(() -> new RuntimeException("Customer Not Found"));
+        assertThat(existCustomer).isNull();
+    }
+
 }
