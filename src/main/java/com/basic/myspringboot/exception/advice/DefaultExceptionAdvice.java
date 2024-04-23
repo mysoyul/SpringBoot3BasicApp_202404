@@ -55,31 +55,31 @@ public class DefaultExceptionAdvice {
         return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    protected ResponseEntity<Object> handleException(Exception e) {
-        Map<String, Object> result = new HashMap<String, Object>();
-        ResponseEntity<Object> ret = null;
-        
-        if (e instanceof BusinessException) {
-        	BusinessException b = (BusinessException) e;
-        	result.put("message", "[안내]\n" + e.getMessage());
-        	result.put("httpStatus", b.getHttpStatus().value());
-        } else if ( e instanceof SystemException) {
-    		SystemException s = (SystemException)e;
-            result.put("message", "[시스템 오류]\n" + s.getMessage());
-            result.put("httpStatus", s.getHttpStatus().value());
-            ret = new ResponseEntity<>(result, s.getHttpStatus());
-            
-            LOGGER.error(s.getMessage(), s);
-    	 } else {
-    		String msg = "예상치 못한 문제가 발생했습니다.\n관리자에게 연락 하시기 바랍니다.";
-	        result.put("message", msg);
-	        result.put("httpStatus", HttpStatus.INTERNAL_SERVER_ERROR.value());
-	        ret = new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
-	        e.printStackTrace();
-	        
-            LOGGER.error(e.getMessage(), e);
-    	}
-        return ret;
-    }
+//    @ExceptionHandler(Exception.class)
+//    protected ResponseEntity<Object> handleException(Exception e) {
+//        Map<String, Object> result = new HashMap<String, Object>();
+//        ResponseEntity<Object> ret = null;
+//
+//        if (e instanceof BusinessException) {
+//        	BusinessException b = (BusinessException) e;
+//        	result.put("message", "[안내]\n" + e.getMessage());
+//        	result.put("httpStatus", b.getHttpStatus().value());
+//        } else if ( e instanceof SystemException) {
+//    		SystemException s = (SystemException)e;
+//            result.put("message", "[시스템 오류]\n" + s.getMessage());
+//            result.put("httpStatus", s.getHttpStatus().value());
+//            ret = new ResponseEntity<>(result, s.getHttpStatus());
+//
+//            LOGGER.error(s.getMessage(), s);
+//    	 } else {
+//    		String msg = "예상치 못한 문제가 발생했습니다.\n관리자에게 연락 하시기 바랍니다.";
+//	        result.put("message", msg);
+//	        result.put("httpStatus", HttpStatus.INTERNAL_SERVER_ERROR.value());
+//	        ret = new ResponseEntity<>(result, HttpStatus.INTERNAL_SERVER_ERROR);
+//	        e.printStackTrace();
+//
+//            LOGGER.error(e.getMessage(), e);
+//    	}
+//        return ret;
+//    }
 }
